@@ -226,11 +226,29 @@
           Количество загрузок: <span id="download-count">0</span>
         </p>
 
-        <script>
-          countapi.get('quicknet', 'download').then((result) => {
-            document.getElementById('download-count').innerText = result. Value;
-          });
-        </script>
+<script>
+  function incrementDownloadCount() {
+    if (typeof countapi !== "undefined") {
+      countapi.hit('quicknet', 'download').then((result) => {
+        console.log('Downloads:', result.value);
+      }).catch((error) => {
+        console.error('CountAPI Error:', error);
+      });
+    } else {
+      console.error('CountAPI not defined.');
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    if (typeof countapi !== "undefined") {
+      countapi.get('quicknet', 'download').then((result) => {
+        document.getElementById('download-count').innerText = result.value;
+      }).catch((error) => {
+        console.error('CountAPI Get Error:', error);
+      });
+    }
+  });
+</script>
       </div>
     </div>
   </section>

@@ -168,6 +168,7 @@
       }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/countapi-js@1.1.0/dist/countapi.min.js"></script>
 </head>
 <body style="margin: 0;">
 <section class="features-container">
@@ -207,15 +208,29 @@
   <section class="download-section">
     <div class="download-row">
       <a href="https://github.com/strobecsmain/QuickNet-AntiDPI/releases/download/QuickNetv3/QuickNet.v3.exe" target="_blank">
-        <button class="download-button" aria-label="Скачать QuickNet">Скачать</button>
+        <button class="download-button" aria-label="Скачать QuickNet" onclick="incrementDownloadCount()">Скачать</button>
       </a>
+      <script>
+        function incrementDownloadCount() {
+          countapi.hit('quicknet', 'download').then((result) => {
+            console.log('Downloads:', result.value);
+          });
+        }
+      </script>
       <div class="version-info">
         <h3 class="feature-title_1">QuickNet v3</h3>
         <p class="feature-description">
           Поддерживаемые OC: Windows 10, 11 и старее<br />
           Вес: 8 мб<br />
           Версия 0.3.0 от 27.10.2024
+          Количество загрузок: <span id="download-count">0</span>
         </p>
+
+        <script>
+          countapi.get('quicknet', 'download').then((result) => {
+            document.getElementById('download-count').innerText = result. Value;
+          });
+        </script>
       </div>
     </div>
   </section>
@@ -236,7 +251,8 @@
       7tv<br />
       Steam<br />
       Twitch<br />
-      Pinterest
+      Pinterest<br />
+      Instagram
     </p>
   </article>
 
